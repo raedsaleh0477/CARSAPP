@@ -1,0 +1,87 @@
+<!-- header.html -->
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            direction: rtl;
+        }
+
+        .top-bar {
+            background: linear-gradient(135deg, #b30000, #ff1a1a);
+            color: white;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #fff5f5;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+            opacity: 0.9;
+        }
+
+        .cart-btn {
+            background: white;
+            color: #b30000;
+            padding: 8px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .cart-btn:hover {
+            background: #ffe6e6;
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-bar">
+    <div class="logo">
+        US <span>Auto Parts</span>
+    </div>
+
+    <div class="nav-links">
+        <a href="#">الرئيسية</a>
+        <a href="#">قطع غيار</a>
+        <a href="#">إكسسوارات</a>
+        <a href="#">تواصل معنا</a>
+    </div>
+
+    <div class="cart-btn" onclick="openCart()">
+        🛒 السلة
+    </div>
+</div>
+
+<script>
+    function openCart() {
+        alert("سيتم فتح سلة المشتريات لاحقًا");
+    }
+</script>
+
+</body>
+</html>

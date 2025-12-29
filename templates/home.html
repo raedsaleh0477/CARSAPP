@@ -1,0 +1,55 @@
+<!-- home.html -->
+{% include 'header.html' %}
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>الرئيسية</title>
+
+    <style>
+        .hero {
+            padding: 80px 40px;
+            text-align: center;
+            background: #fff5f5;
+        }
+
+        .hero h1 {
+            color: #b30000;
+            font-size: 36px;
+        }
+
+        .hero p {
+            color: #333;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .hero button {
+            margin-top: 20px;
+            background: #b30000;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        .hero button:hover {
+            background: #ff1a1a;
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>قطع غيار سيارات أمريكية أصلية</h1>
+    <p>أفضل الأسعار – جودة مضمونة – شحن سريع</p>
+    <button>تصفح المنتجات</button>
+</div>
+
+</body>
+</html>
+
+{% include 'footer.html' %}

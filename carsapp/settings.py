@@ -1,12 +1,15 @@
 from pathlib import Path
 
+# =============================
+# Base Directory
+# =============================
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # =============================
 # Security
 # =============================
-SECRET_KEY = 'django-insecure-nwqyd#&zx=q=ykn*l-oyithri5(+h(hg*&kfye)98c#6(k50+i'
+SECRET_KEY = 'django-insecure-test-key'
 
 DEBUG = True
 
@@ -17,7 +20,6 @@ ALLOWED_HOSTS = []
 # Applications
 # =============================
 INSTALLED_APPS = [
-    # Django default apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -25,10 +27,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Project apps
-    'core',
-    'catalog',
-    'orders',
+    # Apps الخاصة بالمشروع (أضفها لاحقًا)
+    # 'core',
+    # 'catalog',
+    # 'orders',
 ]
 
 
@@ -47,15 +49,27 @@ MIDDLEWARE = [
 
 
 # =============================
-# URLs & Templates
+# URLs & WSGI
 # =============================
 ROOT_URLCONF = 'carsapp.urls'
 
+WSGI_APPLICATION = 'carsapp.wsgi.application'
+
+
+# =============================
+# Templates
+# =============================
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # مجلد قوالب عام
+
+        # templates الرئيسي
+        'DIRS': [
+            BASE_DIR / 'templates',
+        ],
+
         'APP_DIRS': True,
+
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -69,13 +83,7 @@ TEMPLATES = [
 
 
 # =============================
-# WSGI
-# =============================
-WSGI_APPLICATION = 'carsapp.wsgi.application'
-
-
-# =============================
-# Database
+# Database (SQLite)
 # =============================
 DATABASES = {
     'default': {
@@ -86,7 +94,7 @@ DATABASES = {
 
 
 # =============================
-# Password Validation
+# Password validation
 # =============================
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -105,28 +113,34 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # =============================
-# Localization (Arabic + Riyadh)
+# Language & Timezone
 # =============================
 LANGUAGE_CODE = 'ar'
 
 TIME_ZONE = 'Asia/Riyadh'
 
 USE_I18N = True
-USE_L10N = True
 USE_TZ = True
 
 
 # =============================
-# Static Files
+# Static & Media
 # =============================
 STATIC_URL = '/static/'
 
+# ملفات static أثناء التطوير
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',  # تأكد أن المجلد موجود
+    BASE_DIR / 'static',
 ]
+
+# ناتج collectstatic
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # =============================
-# Default Primary Key
+# Default Auto Field
 # =============================
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
