@@ -1,6 +1,6 @@
 from django.urls import path
-from django.http import HttpResponse
+from .views import catalog_home
 
 urlpatterns = [
-    path('', lambda request: HttpResponse("Catalog App Ready")),
+    path('', catalog_home, name='catalog_home'),
 ]

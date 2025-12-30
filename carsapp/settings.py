@@ -27,10 +27,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Apps الخاصة بالمشروع (أضفها لاحقًا)
-    # 'core',
-    # 'catalog',
-    # 'orders',
+    # تطبيقات المشروع
+    'core',
+    'catalog',
+    'orders',
 ]
 
 

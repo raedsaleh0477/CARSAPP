@@ -6,12 +6,20 @@ class Category(models.Model):
     slug = models.SlugField(unique=True)
     is_active = models.BooleanField(default=True)
 
+    class Meta:
+        verbose_name = "تصنيف"
+        verbose_name_plural = "التصنيفات"
+
     def __str__(self):
         return self.name
 
 
 class Product(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        related_name='products'
+    )
     name = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
     description = models.TextField(blank=True)
@@ -20,14 +28,26 @@ class Product(models.Model):
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        verbose_name = "منتج"
+        verbose_name_plural = "المنتجات"
+
     def __str__(self):
         return self.name
 
 
 class ProductImage(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        related_name='images'
+    )
     image = models.ImageField(upload_to='products/')
     is_main = models.BooleanField(default=False)
 
+    class Meta:
+        verbose_name = "صورة منتج"
+        verbose_name_plural = "صور المنتجات"
+
     def __str__(self):
-        return f"Image for {self.product.name}"
+        return f"صورة - {self.product.name}"
