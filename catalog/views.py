@@ -1,7 +1,8 @@
 from django.shortcuts import render
+from .models import Product
 
-# Create your views here.
-from django.shortcuts import render
-
-def catalog_home(request):
-    return render(request, 'catalog-app/catalog_home.html')
+def product_list(request):
+    products = Product.objects.filter(is_active=True)
+    return render(request, 'catalog-app/product_list.html', {
+        'products': products
+    })
