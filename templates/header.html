@@ -43,6 +43,38 @@
             opacity: 0.9;
         }
 
+        .auth-links,
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .auth-links a,
+        .logout-btn {
+            color: white;
+            text-decoration: none;
+            margin: 0 6px;
+            font-size: 14px;
+            padding: 6px 12px;
+            border: 1px solid white;
+            border-radius: 20px;
+            transition: 0.3s;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .auth-links a:hover,
+        .logout-btn:hover {
+            background: white;
+            color: #b30000;
+        }
+
+        .welcome-text {
+            margin-left: 10px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
         .cart-btn {
             background: white;
             color: #b30000;
@@ -51,29 +83,65 @@
             cursor: pointer;
             font-weight: bold;
             transition: 0.3s;
+            margin-right: 15px;
         }
 
         .cart-btn:hover {
             background: #ffe6e6;
+        }
+
+        .right-section {
+            display: flex;
+            align-items: center;
         }
     </style>
 </head>
 <body>
 
 <div class="top-bar">
+
+    <!-- الشعار -->
     <div class="logo">
         US <span>Auto Parts</span>
     </div>
 
+    <!-- روابط التنقل -->
     <div class="nav-links">
-        <a href="#">الرئيسية</a>
+        <a href="{% url 'home' %}">الرئيسية</a>
         <a href="#">قطع غيار</a>
         <a href="#">إكسسوارات</a>
         <a href="#">تواصل معنا</a>
     </div>
 
-    <div class="cart-btn" onclick="openCart()">
-        🛒 السلة
+    <!-- السلة + المستخدم -->
+    <div class="right-section">
+
+        <div class="cart-btn" onclick="openCart()">
+            🛒 السلة
+        </div>
+
+        {% if user.is_authenticated %}
+            <!-- في حال تسجيل الدخول -->
+            <div class="user-info">
+                <span class="welcome-text">
+                    مرحبًا، {{ user.username }}
+                </span>
+
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-btn">
+                        تسجيل الخروج
+                    </button>
+                </form>
+            </div>
+        {% else %}
+            <!-- في حال عدم تسجيل الدخول -->
+            <div class="auth-links">
+                <a href="{% url 'login' %}">تسجيل الدخول</a>
+                <a href="{% url 'register' %}">إنشاء حساب</a>
+            </div>
+        {% endif %}
+
     </div>
 </div>
 
