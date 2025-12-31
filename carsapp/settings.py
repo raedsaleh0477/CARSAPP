@@ -1,4 +1,5 @@
 from pathlib import Path
+import cloudinary
 
 # =============================
 # Base Directory
@@ -20,6 +21,11 @@ ALLOWED_HOSTS = []
 # Applications
 # =============================
 INSTALLED_APPS = [
+    # Cloudinary
+    'cloudinary',
+    'cloudinary_storage',
+
+    # Django Core
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -63,7 +69,6 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
 
-        # templates الرئيسي
         'DIRS': [
             BASE_DIR / 'templates',
         ],
@@ -124,20 +129,36 @@ USE_TZ = True
 
 
 # =============================
-# Static & Media
+# Static Files
 # =============================
 STATIC_URL = '/static/'
 
-# ملفات static أثناء التطوير
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
-# ناتج collectstatic
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+
+# =============================
+# Media (Cloudinary)
+# =============================
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = BASE_DIR / 'media'  # لن يُستخدم فعليًا بعد Cloudinary
+
+
+# =============================
+# Cloudinary Configuration
+# =============================
+cloudinary.config(
+    cloud_name="dpgmo8dmt",
+    api_key="764645471674785",
+    api_secret="nLdMLcRGcM8bfV7mhmQ7GsUIqAA", 
+
+    secure=True
+)
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 # =============================

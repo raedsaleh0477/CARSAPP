@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 
 class Category(models.Model):
@@ -42,7 +43,13 @@ class ProductImage(models.Model):
         on_delete=models.CASCADE,
         related_name='images'
     )
-    image = models.ImageField(upload_to='products/')
+
+    # 🔥 ربط مباشر مع Cloudinary
+    image = CloudinaryField(
+        'image',
+        folder='products'
+    )
+
     is_main = models.BooleanField(default=False)
 
     class Meta:
