@@ -1,21 +1,29 @@
 from pathlib import Path
+import os
 import cloudinary
+from dotenv import load_dotenv
 
 # =============================
 # Base Directory
 # =============================
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# =============================
+# Load .env
+# =============================
+load_dotenv(BASE_DIR / '.env')
 
 # =============================
 # Security
 # =============================
-SECRET_KEY = 'django-insecure-test-key'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
-DEBUG = True
+DEBUG = os.getenv('DJANGO_DEBUG') == 'True'
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = os.getenv(
+    'DJANGO_ALLOWED_HOSTS',
+    ''
+).split(',') if os.getenv('DJANGO_ALLOWED_HOSTS') else []
 
 # =============================
 # Applications
@@ -39,7 +47,6 @@ INSTALLED_APPS = [
     'orders',
 ]
 
-
 # =============================
 # Middleware
 # =============================
@@ -53,14 +60,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
 # =============================
 # URLs & WSGI
 # =============================
 ROOT_URLCONF = 'carsapp.urls'
 
 WSGI_APPLICATION = 'carsapp.wsgi.application'
-
 
 # =============================
 # Templates
@@ -86,7 +91,6 @@ TEMPLATES = [
     },
 ]
 
-
 # =============================
 # Database (SQLite)
 # =============================
@@ -96,7 +100,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # =============================
 # Password validation
@@ -116,7 +119,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # =============================
 # Language & Timezone
 # =============================
@@ -126,7 +128,6 @@ TIME_ZONE = 'Asia/Riyadh'
 
 USE_I18N = True
 USE_TZ = True
-
 
 # =============================
 # Static Files
@@ -139,27 +140,23 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-
 # =============================
 # Media (Cloudinary)
 # =============================
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'  # لن يُستخدم فعليًا بعد Cloudinary
-
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # =============================
 # Cloudinary Configuration
 # =============================
 cloudinary.config(
-    cloud_name="dpgmo8dmt",
-    api_key="764645471674785",
-    api_secret="nLdMLcRGcM8bfV7mhmQ7GsUIqAA", 
-
+    cloud_name=os.getenv('CLOUDINARY_CLOUD_NAME'),
+    api_key=os.getenv('CLOUDINARY_API_KEY'),
+    api_secret=os.getenv('CLOUDINARY_API_SECRET'),
     secure=True
 )
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
 
 # =============================
 # Default Auto Field
